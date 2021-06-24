@@ -36,7 +36,7 @@ pipeline {
                 SDK_GCPPROJECT_FILE = credentials('sdk-test-gcp-project')
             }
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh 'sudo pip3 install -r requirements.txt'
                 sh 'cd tests'
                 sh 'python3 -m pytest'
             }
