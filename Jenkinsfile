@@ -24,14 +24,20 @@ pipeline {
             }
         }
         stage('Function Tests') {
+            environment {
+                // GCP credentials.
+                GOOGLE_APPLICATION_CREDENTIALS = credentials('sdk-gcp-service-account')
+
+                // Polaris credentials.
+                RUBRIK_POLARIS_SERVICEACCOUNT_FILE = credentials('sdk-polaris-service-account')
+                
+                // Cloud resource specific information used to verify the
+                // information read from Polaris.
+                SDK_GCPPROJECT_FILE = credentials('sdk-test-gcp-project')
+            }
             steps {
-                echo 'Run Tests'
-                withCredentials([
-                    usernamePassword(credentialsId: 'polaris_beta', usernameVariable: 'POLARIS_BETA_USR', passwordVariable: 'POLARIS_BETA_PWD'),
-                    usernamePassword(credentialsId: 'polaris_prod', usernameVariable: 'POLARIS_PROD_USR', passwordVariable: 'POLARIS_PROD_PWD')
-                ]) {
-                    sh 'printenv'
-                }
+                sh 'cd tests'
+                sh 'python3 -m pytest'
             }
         }
     }
