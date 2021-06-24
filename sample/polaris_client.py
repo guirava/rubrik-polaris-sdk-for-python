@@ -51,7 +51,7 @@ except Exception as err:
 # rubrik.add_project_gcp(service_account_auth_key_file="/home/peterm/galactus-gcp-1-a3c-1.json", gcp_native_project_id="pm-team-1")
 
 ### Add AWS Acct (local profile must be configured, specify list of profiles _or_ set all=True.
-# rubrik.add_account_aws(aws_regions=["US_EAST_1"], aws_profiles=["milanese"], cloud_account_features=["CLOUD_NATIVE_PROTECTION"])
+# rubrik.add_account_aws(aws_regions=["US_EAST_2"], aws_profiles=["milanese"], cloud_account_features=["CLOUD_NATIVE_PROTECTION"])
 # rubrik.add_account_aws(aws_regions = ["US-EAST_1"], aws_access_key_id='blah', aws_secret_access_key='blah', cloud_account_features=["CLOUD_NATIVE_PROTECTION"])
 # rubrik.add_account_aws(aws_regions = ["US_WEST_2"], all = True,  cloud_account_features=["CLOUD_NATIVE_PROTECTION"])
 
@@ -117,8 +117,8 @@ except Exception as err:
 # pp.pprint(rubrik.get_accounts_gcp("Trinity-FDSE"))
 # pp.pprint(rubrik.get_accounts_azure("RubrikRangers"))
 # pp.pprint(rubrik.get_accounts_aws())
-# pp.pprint(rubrik.get_accounts_gcp())
-# pp.pprint(rubrik.get_accounts_azure())
+pp.pprint(rubrik.get_accounts_gcp())
+pp.pprint(rubrik.get_accounts_azure_cloud())
 # pp.pprint(rubrik.update_account_aws())
 
 ### Event interface
@@ -204,4 +204,4 @@ except Exception as err:
 # )
 
 ### Delete Azure Sub
-# rubrik.delete_account_azure(azure_subscription_id='8fa81a5e-a236-4a73-8e28-e1dcf863c56d')
+rubrik.delete_account_azure(azure_subscription_id='8fa81a5e-a236-4a73-8e28-e1dcf863c56d')
