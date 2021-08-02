@@ -1,5 +1,6 @@
 mutation RubrikPolarisSDKRequest($jobconfig: CleanupFailoverJobInfo!) {
     cleanupBlueprintFailover(cleanupJobconfig: $jobconfig) {
         jobId
+        taskchainId
     }
 }

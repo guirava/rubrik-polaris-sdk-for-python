@@ -1,0 +1,34 @@
+query RubrikPolarisSDKRequest($fid: UUID!, $clusterUuid: UUID!) {
+  blueprintNew(fid: $fid) {
+    id
+    name
+    children {
+      ... on VSphereVmChild {
+        snappable {
+          name
+          id
+          ... on VSphereVm {
+            cdmId
+            isRelic
+            __typename
+          }
+          __typename
+        }
+        recoveryInfo(clusterUuid: $clusterUuid) {
+          recoveryPoints {
+            localRecoveryPoint
+            __typename
+          }
+          recoveryState {
+            replicationStatus
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}

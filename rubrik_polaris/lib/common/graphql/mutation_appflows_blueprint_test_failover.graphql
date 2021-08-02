@@ -1,5 +1,6 @@
 mutation RubrikPolarisSDKRequest($failoverJobConfig: BlueprintFailoverJobConfig!) {
   startBlueprintFailover(failoverJobConfig: $failoverJobConfig) {
     jobId
+    taskchainId
   }
 }
