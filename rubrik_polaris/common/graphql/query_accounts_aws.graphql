@@ -8,7 +8,7 @@ query RubrikPolarisSDKRequest($awsNativeProtectionFeature: AwsNativeProtectionFe
         edges {
             node {
                 id:id
-                regions
+                regions: regionSpecs {region}
                 status
                 name: name
                 sla_assignment: slaAssignment

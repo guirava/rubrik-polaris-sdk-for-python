@@ -1,5 +1,5 @@
-mutation RubrikPolarisSDKRequest($azure_subscription_id: UUID!, $delete_snapshots: Boolean!){
-    deleteAzureNativeSubscription(subscriptionId: $azure_subscription_id, shouldDeleteNativeSnapshots: $delete_snapshots){
-        taskchainUuid
+mutation RubrikPolarisSDKRequest($azure_subscription_id: UUID!, $delete_snapshots: Boolean!, $features: AzureNativeProtectionFeature!){
+    startDisableAzureNativeSubscriptionProtectionJob(input: {azureNativeProtectionFeature: $features, azureSubscriptionRubrikId: $azure_subscription_id, shouldDeleteNativeSnapshots: $delete_snapshots}){
+        jobId
     }
 }
