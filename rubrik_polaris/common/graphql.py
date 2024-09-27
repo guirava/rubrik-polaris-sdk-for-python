@@ -23,6 +23,8 @@
 Collection of methods that interact with the raw GraphQL.
 """
 
+from glob import glob
+import os.path
 import re
 
 def _build_graphql_maps(self):
@@ -128,3 +130,13 @@ def get_enum_values(self, name=None):
         return self._query(query_name, variables)
     except Exception:
         raise
+
+
+def path_contains_graphql_files(path) -> bool:
+    """Returns True if path contains at least one .gql
+    or .graphql file."""
+    if os.path.exists(path) and os.path.isdir(path):
+        # Check if there are any .gql or .graphql files in the directory
+        graphql_files = glob(os.path.join(path, '*.gql')) + glob(os.path.join(path, '*.graphql'))
+        return len(graphql_files) > 0
+    return False

@@ -26,6 +26,9 @@ import json
 import logging
 from .exceptions import RequestException
 from .logger import logging_setup
+from . import common
+
+__THIS_DIR__ = os.path.dirname(os.path.realpath(__file__))
 
 """Instantiates Polaris connection context
 Args:
@@ -123,8 +126,12 @@ class PolarisClient:
 
         # Set base variables
         self._kwargs = kwargs
-        self._data_path = "{}/graphql/".format(os.path.dirname(os.path.realpath(__file__)))
-
+        self._data_path = "{}/graphql/".format(__THIS_DIR__)
+        # If installed path doesn't contain any GraphQL files, try dev path
+        if not common.graphql.path_contains_graphql_files(self._data_path):
+            self._data_path = "{}/common/graphql/".format(__THIS_DIR__)
+            if not common.graphql.path_contains_graphql_files(self._data_path):
+                raise FileNotFoundError("No graphql files found.")
         # Switch off SSL checks if needed
         if 'insecure' in self._kwargs and self._kwargs['insecure']:
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
